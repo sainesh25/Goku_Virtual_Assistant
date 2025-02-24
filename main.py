@@ -2,12 +2,13 @@ import speech_recognition as sr
 import webbrowser
 import pyttsx3
 
+import musicLibrary
 recognizer = sr.Recognizer()
-engin = pyttsx3.init()
+engine = pyttsx3.init()
 
 def speak(text):
-    engin.say(text)
-    engin.runAndWait()
+    engine.say(text)
+    engine.runAndWait()
 
 def processRequest(c):
     if 'open google' in c.lower():
