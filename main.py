@@ -1,7 +1,6 @@
 import speech_recognition as sr
 import webbrowser
 import pyttsx3
-
 import musicLibrary
 recognizer = sr.Recognizer()
 engine = pyttsx3.init()
@@ -28,6 +27,26 @@ def processRequest(c):
         webbrowser.open(link)    
     
         
+        
 if __name__ == "__main__":
     speak('Initializing Goku......')
-    
+    while True:
+
+        try:
+            with sr.Microphone() as source:
+                print("Listening...")
+                audio = recognizer.listen(source, timeout=2, phrase_time_limit=5)
+            
+            print('Recognizing...')    
+            word = recognizer.recognize_google(audio)
+            if word.lower() == 'goku':
+                speak('I am Listening')
+                with sr.Microphone() as source:
+                    print('Goku Active...')
+                    audio = recognizer.listen(source)
+                    command = recognizer.recognize_google(audio)
+                    
+                    processRequest(command)    
+            print(command)    
+        except Exception as e:
+            print(e)    
